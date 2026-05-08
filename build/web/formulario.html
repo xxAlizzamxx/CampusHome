@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - CampusHome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-green: #2D6A4F;
+            --light-green: #D8F3DC;
+            --accent-green: #95D5B2;
+            --text-dark: #1b4332;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e9f5ec;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Contenedor principal estilo Tarjeta */
+        .card-container {
+            background-color: #f9fffb;
+            width: 1000px;
+            max-width: 95%;
+            border-radius: 40px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        /* Logo arriba a la izquierda */
+        .brand-header {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            top: 30px;
+            left: 40px;
+        }
+
+        .logo-dot {
+            width: 35px;
+            height: 35px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            margin-right: 12px;
+        }
+
+        .brand-name {
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+        }
+
+        /* Layout de contenido (Imagen izq, Form der) */
+        .content-layout {
+            display: flex;
+            gap: 40px;
+            margin-top: 60px; /* Espacio para el logo de arriba */
+            align-items: center;
+        }
+
+        /* Imagen flotando a la izquierda */
+        .image-wrapper {
+            flex: 1.1;
+            border-radius: 30px;
+            overflow: hidden;
+            height: 450px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Lado del registro */
+        .form-side {
+            flex: 1.2;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin: 0;
+            color: var(--text-dark);
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        /* Grid de 2 columnas para el formulario */
+        .registration-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .input-box {
+            position: relative;
+        }
+
+        .input-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 12px 12px 45px;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            background-color: white;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(149, 213, 178, 0.2);
+        }
+
+        /* Términos y Condiciones */
+        .terms-row {
+            grid-column: span 2;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .terms-row input { width: auto; padding: 0; }
+        .terms-row label { font-size: 0.75rem; font-weight: 400; color: #555; }
+
+        /* Botón de Registro */
+        .btn-register {
+            grid-column: span 2;
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-register:hover {
+            background-color: #1b4332;
+            transform: translateY(-2px);
+        }
+
+        .login-footer {
+            grid-column: span 2;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.85rem;
+        }
+
+        .login-footer a {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Alertas de Servlet */
+        .alert {
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: none;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        .success { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .error { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+
+        /* Mobile */
+        @media (max-width: 900px) {
+            .content-layout { flex-direction: column; }
+            .image-wrapper { width: 100%; height: 250px; }
+            .registration-grid { grid-template-columns: 1fr; }
+            .terms-row, .btn-register, .login-footer { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <div class="brand-header">
+            <div class="logo-dot"></div>
+            <span class="brand-name">CampusHome</span>
+        </div>
+
+        <div class="content-layout">
+            <div class="image-wrapper">
+                <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Habitación universitaria">
+            </div>
+
+            <div class="form-side">
+                <h2>REGISTRO</h2>
+                <p class="subtitle">Crea tu cuenta para comenzar</p>
+
+                <div id="mensaje" class="alert"></div>
+
+                <form action="LoginServlet" method="post">
+                    <div class="registration-grid">
+                        
+                        <div class="field-group">
+                            <label>Nombre completo</label>
+                            <div class="input-box">
+                                <i class="fa-solid fa-user"></i>
+                                <input type="text" name="nombre" placeholder="Ingrese su nombre completo" required>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label>Correo Electrónico</label>
+                            <div class="input-box">
+                                <i class="fa-solid fa-envelope"></i>
+                                <input type="email" name="correo" placeholder="Ingrese su correo electrónico" required>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label>Contraseña</label>
+                            <div class="input-box">
+                                <i class="fa-solid fa-lock"></i>
+                                <input type="password" name="password" placeholder="Ingrese su contraseña" required>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label>Confirmar contraseña</label>
+                            <div class="input-box">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <input type="password" placeholder="Confirme su contraseña" required>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label>Teléfono</label>
+                            <div class="input-box">
+                                <i class="fa-solid fa-phone"></i>
+                                <input type="text" name="telefono" placeholder="Ingrese su número" required>
+                            </div>
+                        </div>
+
+                        <div class="terms-row">
+                            <input type="checkbox" required>
+                            <label>Acepto los <b>Términos y Condiciones</b> y la <b>Privacidad</b></label>
+                        </div>
+
+                        <button type="submit" class="btn-register">Crear cuenta</button>
+
+                        <div class="login-footer">
+                            ¿Ya tienes cuenta? <a href="#">Iniciar sesión</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const status = params.get('status');
+        const msgDiv = document.getElementById('mensaje');
+
+        if (status === 'success') {
+            msgDiv.style.display = 'block';
+            msgDiv.className = 'alert success';
+            msgDiv.innerHTML = '<i class="fa-solid fa-check"></i> Registro exitoso.';
+        } else if (status === 'error_sql') {
+            msgDiv.style.display = 'block';
+            msgDiv.className = 'alert error';
+            msgDiv.innerHTML = '<i class="fa-solid fa-xmark"></i> Error: Correo duplicado.';
+        }
+    </script>
+</body>
+</html>
